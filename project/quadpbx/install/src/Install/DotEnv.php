@@ -12,7 +12,6 @@ use Random\RandomException;
 /** @package QuadPBX\Install */
 class DotEnv
 {
-
     private string $dotenv;
     private array $current;
     private array $backup = [];
