@@ -4,9 +4,8 @@ namespace QuadPBX\Core\Laravel;
 
 use QuadPBX\Core\Console\ValidateInstall;
 
-class LaravelServiceProvider  extends \Illuminate\Support\ServiceProvider
+class LaravelServiceProvider extends \Illuminate\Support\ServiceProvider
 {
-
     /**
      * @param \Illuminate\Routing\Router $router
      * @return void

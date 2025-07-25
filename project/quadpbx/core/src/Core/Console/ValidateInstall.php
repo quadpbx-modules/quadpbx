@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 
 class ValidateInstall extends Command
 {
-
     protected $signature = 'quad:validate';
     protected $description = 'Validate basic QPBX install';
 
