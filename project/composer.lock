@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "88970a0117c062eed55fa8728fc43833",
+    "content-hash": "eb0d04090e3b85a3d21a0c4ad5eb43b9",
     "packages": [
         {
             "name": "brick/math",
@@ -3072,6 +3072,36 @@
                 "source": "https://github.com/bobthecow/psysh/tree/v0.12.9"
             },
             "time": "2025-06-23T02:35:06+00:00"
+        },
+        {
+            "name": "quadpbx/base",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "quadpbx",
+                "reference": "cb85e62c030a8d4df51188b2f23a95a9a7938d2d"
+            },
+            "type": "project",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "QuadPBX\\Core\\Laravel\\LaravelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "QuadPBX\\Core\\": "core/src/Core",
+                    "QuadPBX\\Install\\": "install/src/Install"
+                }
+            },
+            "license": [
+                "AGPLv3"
+            ],
+            "description": "Base builder for QuadPBX components.",
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "ralouphie/getallheaders",
@@ -8094,7 +8124,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "quadpbx/base": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
