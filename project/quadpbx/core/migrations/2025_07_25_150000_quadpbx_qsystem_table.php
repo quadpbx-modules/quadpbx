@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('qsystem', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('tenant')->default('default');
             $table->string('group')->default('default');
             $table->string('type', 32)->default('raw');
             $table->string('value')->nullable();
             $table->bigInteger('blobref')->nullable();
-            $table->unique(['name', 'group']);
+            $table->unique(['tenant', 'name', 'group']);
         });
     }
 

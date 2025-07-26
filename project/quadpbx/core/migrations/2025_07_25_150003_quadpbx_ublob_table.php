@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::connection('ublob')->create('ublob', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('usysref');
+            $table->bigInteger('utableref');
             $table->binary('blob')->nullable();
         });
     }
