@@ -6,7 +6,9 @@
     "autoload": {
         "psr-4": {
             "QuadPBX\\Core\\": "core/src/Core",
-            "QuadPBX\\Install\\": "install/src/Install"
+            "QuadPBX\\Install\\": "install/src/Install",
+            "QuadPBX\\Components\\": "components",
+            "QuadPBX\\Modules\\": "modules"
         }
     },
     "extra": {

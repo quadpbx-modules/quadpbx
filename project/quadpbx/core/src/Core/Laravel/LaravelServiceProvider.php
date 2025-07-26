@@ -41,6 +41,7 @@ class LaravelServiceProvider extends \Illuminate\Support\ServiceProvider
             "core" => "$basedir/core.sqlite",
             "blob" => "$basedir/blob.sqlite",
             "userdb" => "$basedir/userdb.sqlite",
+            "ublob" => "$basedir/ublob.sqlite",
         ];
         $retarr = [
             "default" => "core",
