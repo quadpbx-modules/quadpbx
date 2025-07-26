@@ -32,6 +32,6 @@ class ExtGoto extends Base
     public function output(): string
     {
         throw new \Exception("Somethihng is broken in Goto, where is context?");
-        return 'Goto(' . (!$this->gotoEmpty($this->data) ? $this->data . ',' : '') . (!$this->gotoEmpty($this->options) ? $this->options . ',' : '') . $this->pri . ')' ;
+        return 'Goto(' . (!$this->gotoEmpty($this->data) ? $this->data . ',' : '') . (!$this->gotoEmpty($this->options) ? $this->options . ',' : '') . $this->data . ')';
     }
 }
