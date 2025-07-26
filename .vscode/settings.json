@@ -5,4 +5,5 @@
     },
     "workbench.colorCustomizations": {},
     "phpCodeSniffer.exec.linux": "/root/.config/composer/vendor/bin/phpcs",
+    "phpCodeSniffer.standard": "Automatic"
 }

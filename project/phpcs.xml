@@ -1,16 +1,22 @@
 <?xml version="1.0"?>
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="PHP_CodeSniffer" xsi:noNamespaceSchemaLocation="phpcs.xsd">
 
-	<!-- Note - currently not used -->
 	<description>QuadPBX PHPCS</description>
 	<file>./quadpbx</file>
 	<arg value="sp"/>
 	<rule ref="PSR12"/>
 
-	<!-- Here is where I would put my disables, if I had some. -->
-	<rule ref="PEAR.Commenting.FileComment">
-                <exclude name="PEAR.Commenting.FileComment.Missing"/>
-                <!-- Dont really care about this -->
+	<rule ref="PEAR">
+		<exclude name="PEAR.Commenting.ClassComment.Missing"/>
+		<exclude name="PEAR.Commenting.FileComment.Missing"/>
+	</rule>
+
+	<rule ref="Generic.Files.LineLength">
+		<properties>
+			<!-- We all have decent sized screens -->
+			<property name="lineLimit" value="180"/>
+			<property name="absoluteLineLimit" value="0"/>
+		</properties>
 	</rule>
 
 </ruleset>
