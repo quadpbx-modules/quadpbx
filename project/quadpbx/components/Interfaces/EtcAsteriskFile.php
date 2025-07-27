@@ -3,6 +3,7 @@
 namespace QuadPBX\Components\Interfaces;
 
 use Exception;
+use QuadPBX\Components\EtcAsterisk\EtcAsterisk;
 
 abstract class EtcAsteriskFile
 {
@@ -38,16 +39,21 @@ abstract class EtcAsteriskFile
 
     protected string $srcfilename = '';
 
+    protected bool $allowdupes = false;
+    protected array $duplicates = [];
+
     /**
      * Provide the path to a template file to use as the source (optional)
      *
-     * @param string $srcfile File path to the template
+     * @param string  $srcfile    File path to the template
+     * @param boolean $allowdupes Some files have duplicate keys, like modules.conf
      *
      * @return void
      * @throws Exception
      */
-    public function __construct(string $srcfile = "")
+    public function __construct(string $srcfile = "", bool $allowdupes = false)
     {
+        $this->allowdupes = $allowdupes;
         if ($srcfile) {
             if (strpos($srcfile, '/') === false) {
                 $srcfile = __DIR__ . '/../EtcAsterisk/templates/' . $srcfile;
@@ -55,11 +61,12 @@ abstract class EtcAsteriskFile
             if (!file_exists($srcfile)) {
                 throw new \Exception("Template file does not exist: $srcfile");
             }
-            $this->srcfilename = $srcfile;
+            $this->srcfilename = realpath($srcfile);
             $this->srctemplate = file($srcfile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             $this->parseSrcTemplate();
         } else {
             // Always create a default section
+            $this->srcfilename = '/dev/null';
             $this->createSection('__default__');
         }
     }
@@ -90,12 +97,24 @@ abstract class EtcAsteriskFile
             }
             $chunks = explode(' ', $line, 3);
             if (empty($chunks[2])) {
-                throw new \Exception("Unknown line format in template: $line");
+                throw new \Exception("Unknown line format in " . $this->srcfilename . " template: $line");
             }
             $row = explode(';', $chunks[2], 2);
             $comment = trim($row[1] ?? null);
             $this->addToSection($currentSection, trim($chunks[0]), trim($row[0]), $comment);
         }
+    }
+
+    /**
+     * If a file needs to allow duplicate entries, this is how to enable it.
+     *
+     * @param boolean $allow Whether to allow duplicates
+     *
+     * @return void
+     */
+    public function allowDuplicates(bool $allow): void
+    {
+        $this->allowdupes = $allow;
     }
 
     /**
@@ -115,7 +134,14 @@ abstract class EtcAsteriskFile
         if (!isset($this->sections[$sectionName])) {
             throw new Exception("Section '$sectionName' does not exist.");
         }
+        $body = ["value" => $value, "comment" => $comment];
         if (isset($this->sections[$sectionName]['content'][$key])) {
+            if ($this->allowdupes) {
+                $this->duplicates[$sectionName][$key] = [ $this->sections[$sectionName]['content'][$key] ];
+                $this->duplicates[$sectionName][$key][] = $body;
+                $this->sections[$sectionName]['content'][$key] = ["duplicate" => true];
+                return;
+            }
             throw new Exception("Key '$key' already exists in section '$sectionName'.");
         }
         $this->sections[$sectionName]['content'][$key] = ["value" => $value, "comment" => $comment];
@@ -169,19 +195,62 @@ abstract class EtcAsteriskFile
     }
 
     /**
+     * Helper function that is called before writing the file. It
+     * can be used by Files Objects to modify anything before it
+     * is written
+     *
+     * @return void
+     */
+    protected function updateBeforeWrite()
+    {
+        return;
+    }
+
+    /**
+     * Get a list of other files this module may depend on.
+     * The format is [ 'filename' => ['owner' => x, 'perms' => y]]
+     * For example:
+     *   [ '/var/log/asterisk/full.log' => ['owner' => 'asterisk', 'perms' => 0644] ]
+     *
+     * If you're writing this function, make sure you call updateBeforeWrite() too.
+     *
+     * @param EtcAsterisk $e This is used to reference other objects.
+     *
+     * @return array
+     */
+    public function getOtherFiles(EtcAsterisk $e): array
+    {
+        return [];
+    }
+
+    /**
      * Parse a section into a string format. This is used to generate
      * the output for each section.
      *
-     * @param array $section The section to parse
+     * @param array $section    The section to parse
+     * @param array $duplicates Any possible duplicates for this section
      *
      * @return string The parsed section as a string
      */
-    protected function parseSection(array $section): string
+    protected function parseSection(array $section, array $duplicates): string
     {
+
         $str = '';
 
         $delim = $section['delim'];
         foreach ($section['content'] as $key => $row) {
+            // This key has multiple values (eg modules.conf)
+            if (!empty($row['duplicate'])) {
+                $dups = $duplicates[$key];
+                foreach ($dups as $dup) {
+                    $str .= "$key $delim " . $dup['value'];
+                    if ($dup['comment']) {
+                        $str .= " ; " . $dup['comment'];
+                    }
+                    $str .= "\n";
+                }
+                continue;
+            }
             $str .= "$key $delim " . $row['value'];
             if ($row['comment']) {
                 $str .= " ; " . $row['comment'];
@@ -195,13 +264,24 @@ abstract class EtcAsteriskFile
      * Generate the output for the entire file. This will include
      * the default section and all other sections.
      *
+     * @param boolean $simple If true, it will generate output suitable for simple parsing
+     *
      * @return string The complete output as a string
      */
-    public function generateOutput(): string
+    public function generateOutput(bool $simple = false): string
     {
+        // If the File Object wants to modify things, let it.
+        $this->updateBeforeWrite();
+
         // First, check if the __default__ section has anything in it
         $def = $this->sections['__default__'];
-        $str = $this->parseSection($def);
+
+        // Simple? Make sure the delimiter is '='
+        if ($simple) {
+            $def['delim'] = '=';
+        }
+
+        $str = $this->parseSection($def, []);
 
         if ($str) {
             // There was something in default, add a blank line
@@ -213,8 +293,16 @@ abstract class EtcAsteriskFile
             if ($sectionName === '__default__') {
                 continue; // Skip the default section here, it's already processed
             }
-            $str .= "[$sectionName]" . $section['param'] . "\n";
-            $str .= $this->parseSection($section);
+            // Force delimiter to '=', and remove any params for simple output
+            if ($simple) {
+                $param = '';
+                $section['delim'] = '=';
+            } else {
+                $param = $section['param'];
+            }
+            $str .= "[$sectionName]$param\n";
+            $duplicates = $this->duplicates[$sectionName] ?? [];
+            $str .= $this->parseSection($section, $duplicates);
             $str .= "\n";
         }
         return $str;
@@ -224,10 +312,11 @@ abstract class EtcAsteriskFile
      * Delete a setting from a section. If the section or key does not
      * exist, it will throw an exception unless $throw is false. This
      * is to make it easier where delete may be called several times.
+     * This is the only way to delete a setting with duplicates.
      *
-     * @param string $sectionName Name of the section to delete from
-     * @param string $key         Key to delete
-     * @param bool   $throw       Whether to throw an exception if the section/key does not exist
+     * @param string  $sectionName Name of the section to delete from
+     * @param string  $key         Key to delete
+     * @param boolean $throw       Whether to throw an exception if the section/key does not exist
      *
      * @throws Exception If the section or key does not exist and $throw is true
      * @return void
@@ -246,12 +335,14 @@ abstract class EtcAsteriskFile
             }
             return;
         }
+        unset($this->duplicates[$sectionName][$key]);
         unset($this->sections[$sectionName]['content'][$key]);
     }
 
     /**
      * Update a setting in a section. If the section or key does not
-     * exist, it will throw an exception.
+     * exist, it will throw an exception. Does not handle values that
+     * may have duplicates.
      *
      * @param string      $sectionName Name of the section to update
      * @param string      $key         Key to update
@@ -275,5 +366,21 @@ abstract class EtcAsteriskFile
         if ($comment) {
             $this->sections[$sectionName]['content'][$key]['comment'] = $comment;
         }
+    }
+
+    /**
+     * Simple function to get the contents of the generated output as an array.
+     *
+     * @return array
+     *
+     * @throws Exception
+     */
+    public function getAsArray(): array
+    {
+        $p = parse_ini_string($this->generateOutput(true), true, INI_SCANNER_RAW);
+        if (!is_array($p)) {
+            throw new \Exception("Failed to parse generated of " . $this->srcfilename . " output as an ini.");
+        }
+        return $p;
     }
 }

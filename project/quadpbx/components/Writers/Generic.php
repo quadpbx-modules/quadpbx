@@ -2,8 +2,8 @@
 
 namespace QuadPBX\Components\Writers;
 
-use QuadPBX\Components\Interfaces\EtcAsteriskFile;
+use QuadPBX\Components\Interfaces\WriterInterface;
 
-class Generic extends EtcAsteriskFile
+class Generic extends WriterInterface
 {
 }

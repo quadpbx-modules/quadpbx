@@ -6,9 +6,13 @@ use QuadPBX\Interfaces\DialplanObject;
 
 class Base implements DialplanObject
 {
-    /** @var mixed data */
+    /**
+     * @var mixed data
+     */
     protected $data;
-    /** @var mixed options */
+    /**
+     * @var mixed options
+     */
     protected $options;
 
     public function __construct($data = '', $options = '')

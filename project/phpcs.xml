@@ -1,22 +1,32 @@
 <?xml version="1.0"?>
 <ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="PHP_CodeSniffer" xsi:noNamespaceSchemaLocation="phpcs.xsd">
 
-	<description>QuadPBX PHPCS</description>
-	<file>./quadpbx</file>
-	<arg value="sp"/>
-	<rule ref="PSR12"/>
+    <description>QuadPBX PHPCS</description>
+    <file>./quadpbx</file>
+    <arg value="sp"/>
+    <rule ref="PSR12"/>
 
-	<rule ref="PEAR">
-		<exclude name="PEAR.Commenting.ClassComment.Missing"/>
-		<exclude name="PEAR.Commenting.FileComment.Missing"/>
-	</rule>
+    <rule ref="PEAR">
+        <exclude name="PEAR.Commenting.ClassComment.Missing"/>
+        <exclude name="PEAR.Commenting.FileComment.Missing"/>
+        <!-- This is because $__ is used in various modules to handle serialization -->
+        <exclude name="PEAR.NamingConventions.ValidVariableName.PublicUnderscore"/>
+        <exclude name="PEAR.NamingConventions.ValidFunctionName.MethodDoubleUnderscore"/>
+        <exclude name="PEAR.NamingConventions.ValidFunctionName.PublicUnderscore"/>
+        <exclude name="PEAR.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>
+    </rule>
 
-	<rule ref="Generic.Files.LineLength">
-		<properties>
-			<!-- We all have decent sized screens -->
-			<property name="lineLimit" value="180"/>
-			<property name="absoluteLineLimit" value="0"/>
-		</properties>
-	</rule>
+    <rule ref="PSR2.Classes.PropertyDeclaration">
+        <!-- This is because $__ is used in various modules to handle serialization -->
+        <exclude name="PSR2.Classes.PropertyDeclaration.Underscore"/>
+    </rule>
+
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <!-- We all have decent sized screens -->
+            <property name="lineLimit" value="180"/>
+            <property name="absoluteLineLimit" value="0"/>
+        </properties>
+    </rule>
 
 </ruleset>

@@ -7,19 +7,24 @@ use JsonSerializable;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 
-/** @package QuadPBX\Core\Abstractions */
 abstract class ModelAbstraction implements
     Arrayable,
     ArrayAccess,
     Jsonable,
     JsonSerializable
 {
+    /**
+     * All data stored in the model.
+     *
+     * @var array
+     */
     protected array $__all = [];
 
     /**
      * If no data is provided, don't load anything, it's an empty object
      *
-     * @param null|array $data
+     * @param null|array $data Data to load into the model
+     *
      * @return void
      */
     public function __construct(?array $data = null)
@@ -42,7 +47,8 @@ abstract class ModelAbstraction implements
     /**
      * Only use this once. It'll overwrite this->all
      *
-     * @param array $params
+     * @param array $params Bulk loader
+     *
      * @return $this
      */
     public function __load(array $params)
@@ -55,7 +61,10 @@ abstract class ModelAbstraction implements
     }
 
     /**
-     * @param mixed $key
+     * Get the value of a property by its key.
+     *
+     * @param mixed $key The key
+     *
      * @return mixed
      */
     public function __get($key)
@@ -66,7 +75,10 @@ abstract class ModelAbstraction implements
     }
 
     /**
-     * @param mixed $key
+     * Check if a property is set.
+     *
+     * @param mixed $key The key to check
+     *
      * @return boolean
      */
     public function __isset($key)
@@ -75,8 +87,11 @@ abstract class ModelAbstraction implements
     }
 
     /**
-     * @param mixed $key
-     * @param mixed $value
+     * Set a property by its key.
+     *
+     * @param mixed $key   The key to set
+     * @param mixed $value The value to set
+     *
      * @return void
      */
     public function __set($key, $value)
@@ -86,8 +101,11 @@ abstract class ModelAbstraction implements
     }
 
     /**
-     * @param mixed $offset
-     * @param mixed $value
+     * Update a property by its key.
+     *
+     * @param mixed $offset The key to update
+     * @param mixed $value  The value to set
+     *
      * @return void
      */
     public function offsetSet($offset, $value): void
@@ -96,7 +114,10 @@ abstract class ModelAbstraction implements
     }
 
     /**
-     * @param mixed $offset
+     * Check if a property exists by its key.
+     *
+     * @param mixed $offset key
+     *
      * @return boolean
      */
     public function offsetExists($offset): bool
@@ -105,7 +126,10 @@ abstract class ModelAbstraction implements
     }
 
     /**
-     * @param mixed $offset
+     * Unset a property by its key.
+     *
+     * @param mixed $offset The key to unset
+     *
      * @return void
      */
     public function offsetUnset($offset): void
@@ -114,7 +138,10 @@ abstract class ModelAbstraction implements
     }
 
     /**
-     * @param mixed $offset
+     * Get a property by its key.
+     *
+     * @param mixed $offset The key to get
+     *
      * @return mixed
      */
     public function offsetGet($offset): mixed
@@ -122,28 +149,43 @@ abstract class ModelAbstraction implements
         return isset($this->{$offset}) ? $this->{$offset} : null;
     }
 
-    /** @return mixed  */
-    public function jsonSerialize(): mixed
+    /**
+     * Return the model as an array.
+     *
+     * @return array
+     */
+    public function jsonSerialize(): array
     {
-        return $this->getCollection()->toArray();
+        return $this->toArray();
     }
 
     /**
-     * @param integer $options
+     * Return the model as a JSON string.
+     *
+     * @param integer $options toJson options
+     *
      * @return string
      */
-    public function toJson($options = 0) // phpcs:ignore Squiz.Commenting.FunctionComment.ScalarTypeHintMissing
+    public function toJson($options = 0)
     {
         return $this->getCollection()->toJson($options);
     }
 
-    /** @return array  */
+    /**
+     * Return the model as an array.
+     *
+     * @return array
+     */
     public function toArray()
     {
         return $this->getCollection()->toArray();
     }
 
-    /** @return \Illuminate\Support\Collection  */
+    /**
+     * Get the model as a collection.
+     *
+     * @return \Illuminate\Support\Collection
+     */
     public function getCollection(): \Illuminate\Support\Collection
     {
         $props = get_object_vars($this);
