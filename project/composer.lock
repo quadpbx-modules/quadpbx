@@ -3079,7 +3079,7 @@
             "dist": {
                 "type": "path",
                 "url": "quadpbx",
-                "reference": "3652e1232c1bc515d37c3f904f5ebc36817cf09e"
+                "reference": "65669b4dbd1134569812d4063a0a957da1d9225d"
             },
             "type": "project",
             "extra": {
@@ -3091,6 +3091,7 @@
             },
             "autoload": {
                 "psr-4": {
+                    "QuadPBX\\": "quad/src",
                     "QuadPBX\\Core\\": "core/src/Core",
                     "QuadPBX\\Install\\": "install/src/Install",
                     "QuadPBX\\Components\\": "components",

@@ -2,8 +2,53 @@
 
 namespace QuadPBX\Components\Interfaces;
 
+use QuadPBX\Quad;
+
 abstract class BaseModuleDef
 {
+    protected Quad $quad;
+    protected string $tenant;
+
+    protected string $srcdir;
+
+    /**
+     * @param Quad   $quad   Core QuadPBX instance
+     * @param string $srcdir Where this module is located on disk.
+     *
+     * @return void
+     */
+    public function __construct(Quad $quad, string $srcdir)
+    {
+        $this->quad = $quad;
+        $this->tenant = $quad->getTenant();
+        $this->srcdir = $srcdir;
+    }
+
+    /** @return string  */
+    public function getSrcDir(): string
+    {
+        return $this->srcdir;
+    }
+
+    /**
+     * Return an array of files that this module manages. May be empty.
+     *
+     * @return array
+     */
+    abstract public function filesManaged(): array;
+
+    /**
+     * Module should generate file and return what should be written to disk.
+     *
+     * @param string $filename From filesManaged()
+     *
+     * @return string
+     */
+    public function getProcessedFile(string $filename): string
+    {
+        throw new \Exception("Bug: Module needs to implement processFile for $filename");
+    }
+
     /**
      * Return a single string identifying this module. For example,
      * the 'Extensions' module would return 'extensions'.

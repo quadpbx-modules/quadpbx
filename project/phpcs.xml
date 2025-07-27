@@ -14,11 +14,19 @@
         <exclude name="PEAR.NamingConventions.ValidFunctionName.MethodDoubleUnderscore"/>
         <exclude name="PEAR.NamingConventions.ValidFunctionName.PublicUnderscore"/>
         <exclude name="PEAR.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>
+        <exclude name="PEAR.NamingConventions.ValidFunctionName.PrivateNoUnderscore"/>
     </rule>
 
     <rule ref="PSR2.Classes.PropertyDeclaration">
         <!-- This is because $__ is used in various modules to handle serialization -->
         <exclude name="PSR2.Classes.PropertyDeclaration.Underscore"/>
+    </rule>
+
+    <!-- These are all to allow single-line comments, like @var VarTime -->
+    <rule ref="Generic.Commenting">
+        <exclude name="Generic.Commenting.DocComment.ContentBeforeClose"/>
+        <exclude name="Generic.Commenting.DocComment.MissingShort"/>
+        <exclude name="Generic.Commenting.DocComment.ContentAfterOpen"/>
     </rule>
 
     <rule ref="Generic.Files.LineLength">

@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-use QuadPBX\Interfaces\DialplanObject;
+use QuadPBX\Components\Interfaces\DialplanObject;
 
 class ExtBase implements DialplanObject
 {
@@ -10,10 +10,13 @@ class ExtBase implements DialplanObject
      * @var mixed data
      */
     protected $data;
+
     /**
      * @var mixed options
      */
     protected $options;
+
+    protected string $name = '';
 
     public function __construct($data = '', $options = '')
     {
@@ -21,13 +24,26 @@ class ExtBase implements DialplanObject
         $this->options = $options;
     }
 
-    public function incrementContents($value)
+    /**
+     * Used to set names for Goto's or finding this later.
+     *
+     * @param string $name Simple name to set
+     *
+     * @return void
+     */
+    public function setName(string $name): void
     {
-        return true;
+        $this->name = $name;
+    }
+
+    /** @return string  */
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     public function output(): string
     {
-        return $this->data;
+        throw new \Exception("How did you not make an output?");
     }
 }

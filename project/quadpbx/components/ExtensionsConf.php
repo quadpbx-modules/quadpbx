@@ -2,15 +2,37 @@
 
 namespace QuadPBX\Components;
 
+use QuadPBX\Quad;
+
 class ExtensionsConf
 {
-    public function getFilename(): string
+    private array $sections = [];
+    private array $order = [];
+
+    private Quad $quad;
+
+    public function __construct(Quad $quad)
     {
-        return "extensions_quadpbx.conf";
+        $this->quad = $quad;
     }
 
-    public function __construct()
+    public function getSection(string $section, int $order = 100): ExtensionsConfSection
     {
-        throw new \Exception("todo: Everything");
+        // Only add the section if it doesn't already exist
+        if (empty($this->sections[$section])) {
+            $ecs = new ExtensionsConfSection($section);
+            $this->order[$order][] = $section;
+            $this->sections[$section] = $ecs;
+        }
+        return $this->sections[$section];
+    }
+
+    public function getOutput(): string
+    {
+        $str = '';
+        foreach ($this->sections as $section) {
+            $str .= $section->getOutput();
+        }
+        return $str;
     }
 }

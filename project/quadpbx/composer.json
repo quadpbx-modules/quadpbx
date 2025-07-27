@@ -5,6 +5,7 @@
     "license": "AGPLv3",
     "autoload": {
         "psr-4": {
+            "QuadPBX\\": "quad/src",
             "QuadPBX\\Core\\": "core/src/Core",
             "QuadPBX\\Install\\": "install/src/Install",
             "QuadPBX\\Components\\": "components",
