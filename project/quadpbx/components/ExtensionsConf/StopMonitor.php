@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class StopMonitor extends Base
+class StopMonitor extends ExtBase
 {
     public function output(): string
     {

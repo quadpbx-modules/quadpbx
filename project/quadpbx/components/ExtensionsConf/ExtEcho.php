@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class ExtEcho extends Base
+class ExtEcho extends ExtBase
 {
     public function output(): string
     {

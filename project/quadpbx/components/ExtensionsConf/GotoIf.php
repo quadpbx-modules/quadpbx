@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class GotoIf extends Base
+class GotoIf extends ExtBase
 {
     protected $true_priority;
     protected $false_priority;

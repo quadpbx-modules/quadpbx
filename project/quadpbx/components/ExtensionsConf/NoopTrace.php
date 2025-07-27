@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class NoopTrace extends Base
+class NoopTrace extends ExtBase
 {
     public function output(): string
     {

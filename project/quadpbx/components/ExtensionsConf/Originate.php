@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Originate extends Base
+class Originate extends ExtBase
 {
     public function __construct()
     {

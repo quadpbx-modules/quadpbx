@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Park extends Base
+class Park extends ExtBase
 {
     public function output(): string
     {

@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class MessageSend extends Base
+class MessageSend extends ExtBase
 {
     public function output(): string
     {

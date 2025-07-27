@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class TxtCidName extends Base
+class TxtCidName extends ExtBase
 {
     public function output(): string
     {

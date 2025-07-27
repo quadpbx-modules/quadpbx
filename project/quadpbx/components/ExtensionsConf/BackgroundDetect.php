@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class BackgroundDetect extends Base
+class BackgroundDetect extends ExtBase
 {
     protected string $filename;
     protected string $silence;

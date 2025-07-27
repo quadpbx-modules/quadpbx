@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Read extends Base
+class Read extends ExtBase
 {
     protected string $varname;
     protected string $filename;

@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class ResponseTimeout extends Base
+class ResponseTimeout extends ExtBase
 {
     public function output(): string
     {

@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SIPAddHeader extends Base
+class SIPAddHeader extends ExtBase
 {
     public function output(): string
     {

@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Authenticate extends Base
+class Authenticate extends ExtBase
 {
     public function output(): string
     {

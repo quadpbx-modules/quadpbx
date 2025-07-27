@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class ConfBridge extends Base
+class ConfBridge extends ExtBase
 {
     protected string $pin;
 

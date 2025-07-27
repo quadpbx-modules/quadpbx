@@ -4,7 +4,7 @@ namespace QuadPBX\Components\ExtensionsConf;
 
 use QuadPBX\Interfaces\DialplanObject;
 
-class Base implements DialplanObject
+class ExtBase implements DialplanObject
 {
     /**
      * @var mixed data

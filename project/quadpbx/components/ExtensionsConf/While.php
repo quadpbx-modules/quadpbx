@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class ExtWhile extends Base
+class ExtWhile extends ExtBase
 {
     public function output(): string
     {

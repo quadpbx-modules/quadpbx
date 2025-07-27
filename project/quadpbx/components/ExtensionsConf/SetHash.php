@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SetHash extends Base
+class SetHash extends ExtBase
 {
     public function __construct()
     {

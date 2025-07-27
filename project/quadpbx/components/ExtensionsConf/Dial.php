@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Dial extends Base
+class Dial extends ExtBase
 {
     public function output(): string
     {

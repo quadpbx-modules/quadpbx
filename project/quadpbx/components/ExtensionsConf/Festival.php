@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Festival extends Base
+class Festival extends ExtBase
 {
     public function output(): string
     {

@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SpeechCreate extends Base
+class SpeechCreate extends ExtBase
 {
     public function output(): string
     {

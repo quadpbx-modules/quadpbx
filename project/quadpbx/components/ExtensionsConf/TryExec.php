@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class TryExec extends Base
+class TryExec extends ExtBase
 {
     public function output(): string
     {

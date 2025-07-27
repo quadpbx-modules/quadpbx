@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SpeechDtmfMaxDigits extends Base
+class SpeechDtmfMaxDigits extends ExtBase
 {
     public function output(): string
     {

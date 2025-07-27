@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class CallCompletionRequest extends Base
+class CallCompletionRequest extends ExtBase
 {
     public function output(): string
     {

@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class ParkedCall extends Base
+class ParkedCall extends ExtBase
 {
     public function output(): string
     {

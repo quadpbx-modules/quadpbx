@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class ClearHash extends Base
+class ClearHash extends ExtBase
 {
     public function output(): string
     {

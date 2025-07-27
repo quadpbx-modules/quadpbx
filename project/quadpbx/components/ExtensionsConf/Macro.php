@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Macro extends Base
+class Macro extends ExtBase
 {
     public function __construct()
     {

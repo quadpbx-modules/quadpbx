@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class GosubIf extends Base
+class GosubIf extends ExtBase
 {
     protected $true_priority;
     protected $false_priority;

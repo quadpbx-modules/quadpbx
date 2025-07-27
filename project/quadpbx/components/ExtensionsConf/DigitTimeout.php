@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class DigitTimeout extends Base
+class DigitTimeout extends ExtBase
 {
     public function output(): string
     {

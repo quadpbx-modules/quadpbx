@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class ContinueWhile extends Base
+class ContinueWhile extends ExtBase
 {
     public function output(): string
     {

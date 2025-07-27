@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class RemoveQueueMember extends Base
+class RemoveQueueMember extends ExtBase
 {
     public function output(): string
     {

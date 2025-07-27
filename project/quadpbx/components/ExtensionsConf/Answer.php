@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Answer extends Base
+class Answer extends ExtBase
 {
     public function output(): string
     {

@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class VmMain extends Base
+class VmMain extends ExtBase
 {
     public function output(): string
     {

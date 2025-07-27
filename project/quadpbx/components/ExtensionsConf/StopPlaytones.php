@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class StopPlaytones extends Base
+class StopPlaytones extends ExtBase
 {
     public function output(): string
     {

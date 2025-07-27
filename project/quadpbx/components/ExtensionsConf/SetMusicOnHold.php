@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SetMusicOnHold extends Base
+class SetMusicOnHold extends ExtBase
 {
     public function output(): string
     {

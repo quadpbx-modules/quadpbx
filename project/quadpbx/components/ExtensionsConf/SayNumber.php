@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SayNumber extends Base
+class SayNumber extends ExtBase
 {
     public function output(): string
     {

@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SetGlobalVar extends Base
+class SetGlobalVar extends ExtBase
 {
     public function output(): string
     {

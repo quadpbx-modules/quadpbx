@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Stasis extends Base
+class Stasis extends ExtBase
 {
     public function output(): string
     {

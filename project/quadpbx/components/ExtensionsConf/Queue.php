@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Queue extends Base
+class Queue extends ExtBase
 {
     public function __construct()
     {

@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Hangup extends Base
+class Hangup extends ExtBase
 {
     public function output(): string
     {

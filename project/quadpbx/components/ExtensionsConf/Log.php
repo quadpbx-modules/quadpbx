@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Log extends Base
+class Log extends ExtBase
 {
     public function output(): string
     {

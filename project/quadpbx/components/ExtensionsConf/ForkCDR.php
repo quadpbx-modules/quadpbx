@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class ForkCDR extends Base
+class ForkCDR extends ExtBase
 {
     public function output(): string
     {

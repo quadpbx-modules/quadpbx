@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class PrivacyManager extends Base
+class PrivacyManager extends ExtBase
 {
     public function output(): string
     {

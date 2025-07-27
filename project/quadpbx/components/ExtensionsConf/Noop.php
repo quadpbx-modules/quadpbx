@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Noop extends Base
+class Noop extends ExtBase
 {
     public function output(): string
     {

@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class ChanIsAvail extends Base
+class ChanIsAvail extends ExtBase
 {
     public function output(): string
     {

@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SpeechDtmfTerminator extends Base
+class SpeechDtmfTerminator extends ExtBase
 {
     public function output(): string
     {

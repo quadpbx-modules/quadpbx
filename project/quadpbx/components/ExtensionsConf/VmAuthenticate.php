@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class VmAuthenticate extends Base
+class VmAuthenticate extends ExtBase
 {
     public function output(): string
     {

@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class DbDel extends Base
+class DbDel extends ExtBase
 {
     public function output(): string
     {

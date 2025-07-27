@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SendDtmf extends Base
+class SendDtmf extends ExtBase
 {
     public function output(): string
     {

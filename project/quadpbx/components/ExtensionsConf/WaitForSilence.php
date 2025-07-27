@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class WaitForSilence extends Base
+class WaitForSilence extends ExtBase
 {
     public function output(): string
     {

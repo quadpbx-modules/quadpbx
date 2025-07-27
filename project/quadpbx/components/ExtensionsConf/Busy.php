@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Busy extends Base
+class Busy extends ExtBase
 {
     public function output(): string
     {

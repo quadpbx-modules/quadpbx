@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class ExecIf
+class ExecIf extends ExtBase
 {
     protected $expr;
     protected $app_true;

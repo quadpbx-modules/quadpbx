@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class MeetMeAdmin extends Base
+class MeetMeAdmin extends ExtBase
 {
     protected string $user;
 

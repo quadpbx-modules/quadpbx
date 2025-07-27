@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class MixMonitor extends Base
+class MixMonitor extends ExtBase
 {
     protected string $postcommand;
 

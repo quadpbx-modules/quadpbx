@@ -4,7 +4,7 @@ namespace QuadPBX\Components\ExtensionsConf;
 
 use QuadPBX\Core\Error;
 
-class ExtGoto extends Base
+class ExtGoto extends ExtBase
 {
     protected string $context;
 

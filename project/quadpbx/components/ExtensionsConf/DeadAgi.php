@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class DeadAgi extends Base
+class DeadAgi extends ExtBase
 {
     public function output(): string
     {

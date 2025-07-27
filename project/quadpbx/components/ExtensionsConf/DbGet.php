@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class DbGet extends Base
+class DbGet extends ExtBase
 {
     public function output(): string
     {

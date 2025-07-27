@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Ringing extends Base
+class Ringing extends ExtBase
 {
     public function output(): string
     {

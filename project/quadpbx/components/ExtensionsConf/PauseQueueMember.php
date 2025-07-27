@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class PauseQueueMember extends Base
+class PauseQueueMember extends ExtBase
 {
     public function __construct()
     {

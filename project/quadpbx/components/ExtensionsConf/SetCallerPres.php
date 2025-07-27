@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SetCallerPres extends Base
+class SetCallerPres extends ExtBase
 {
     public function output(): string
     {

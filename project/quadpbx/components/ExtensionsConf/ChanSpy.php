@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class ChanSpy extends Base
+class ChanSpy extends ExtBase
 {
     public function output(): string
     {

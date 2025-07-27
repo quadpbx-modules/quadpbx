@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Zapateller extends Base
+class Zapateller extends ExtBase
 {
     public function output(): string
     {

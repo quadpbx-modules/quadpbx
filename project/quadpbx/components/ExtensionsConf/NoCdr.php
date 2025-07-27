@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class NoCdr extends Base
+class NoCdr extends ExtBase
 {
     public function output(): string
     {

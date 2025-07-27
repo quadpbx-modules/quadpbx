@@ -4,7 +4,7 @@ namespace QuadPBX\Components\ExtensionsConf;
 
 use QuadPBX\Core\Error;
 
-class Gosub extends Base
+class Gosub extends ExtBase
 {
     protected string $pri;
     protected string $ext;

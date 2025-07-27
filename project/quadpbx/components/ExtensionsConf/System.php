@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class System extends Base
+class System extends ExtBase
 {
     public function output(): string
     {

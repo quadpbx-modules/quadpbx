@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class DPickup extends Base
+class DPickup extends ExtBase
 {
     public function output(): string
     {

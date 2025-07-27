@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class DbPut extends Base
+class DbPut extends ExtBase
 {
     public function output(): string
     {

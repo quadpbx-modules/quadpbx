@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class ResetCDR extends Base
+class ResetCDR extends ExtBase
 {
     public function output(): string
     {

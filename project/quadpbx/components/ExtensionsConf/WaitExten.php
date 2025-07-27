@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class WaitExten extends Base
+class WaitExten extends ExtBase
 {
     public function output(): string
     {

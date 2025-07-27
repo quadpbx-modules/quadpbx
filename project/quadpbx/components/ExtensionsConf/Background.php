@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Background extends Base
+class Background extends ExtBase
 {
     public function output(): string
     {

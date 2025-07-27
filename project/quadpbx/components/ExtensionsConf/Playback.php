@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Playback extends Base
+class Playback extends ExtBase
 {
     public function output(): string
     {

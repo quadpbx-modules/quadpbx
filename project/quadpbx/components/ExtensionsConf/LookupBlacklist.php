@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class LookupBlacklist extends Base
+class LookupBlacklist extends ExtBase
 {
     public function output(): string
     {

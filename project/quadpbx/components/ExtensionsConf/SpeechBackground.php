@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SpeechBackground extends Base
+class SpeechBackground extends ExtBase
 {
     protected int $timeout;
 

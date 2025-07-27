@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class UserEvent extends Base
+class UserEvent extends ExtBase
 {
     public function output(): string
     {

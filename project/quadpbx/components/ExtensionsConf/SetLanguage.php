@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SetLanguage extends Base
+class SetLanguage extends ExtBase
 {
     public function output(): string
     {

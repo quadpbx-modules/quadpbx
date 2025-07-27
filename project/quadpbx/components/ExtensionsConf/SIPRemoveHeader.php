@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SIPRemoveHeader extends Base
+class SIPRemoveHeader extends ExtBase
 {
     public function output(): string
     {

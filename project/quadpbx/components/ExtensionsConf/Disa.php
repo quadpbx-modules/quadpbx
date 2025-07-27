@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Disa extends Base
+class Disa extends ExtBase
 {
     public function output(): string
     {

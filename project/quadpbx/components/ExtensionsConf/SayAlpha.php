@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SayAlpha extends Base
+class SayAlpha extends ExtBase
 {
     public function output(): string
     {

@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SayUnixTime extends Base
+class SayUnixTime extends ExtBase
 {
     public function output(): string
     {

@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SpeechDestroy extends Base
+class SpeechDestroy extends ExtBase
 {
     public function output(): string
     {

@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SendFax extends Base
+class SendFax extends ExtBase
 {
     public function output(): string
     {

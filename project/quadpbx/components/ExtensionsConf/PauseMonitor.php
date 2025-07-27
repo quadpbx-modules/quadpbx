@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class PauseMonitor extends Base
+class PauseMonitor extends ExtBase
 {
     public function output(): string
     {

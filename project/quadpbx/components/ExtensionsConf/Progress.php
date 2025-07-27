@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Progress extends Base
+class Progress extends ExtBase
 {
     public function output(): string
     {

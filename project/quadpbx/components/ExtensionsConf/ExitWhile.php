@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class ExitWhile extends Base
+class ExitWhile extends ExtBase
 {
     public function output(): string
     {

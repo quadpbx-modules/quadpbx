@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class Congestion extends Base
+class Congestion extends ExtBase
 {
     public function output(): string
     {

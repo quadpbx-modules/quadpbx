@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class GotoIfTime extends Base
+class GotoIfTime extends ExtBase
 {
     public function output(): string
     {

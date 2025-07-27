@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Components\ExtensionsConf;
 
-class SpeechLoadGrammar extends Base
+class SpeechLoadGrammar extends ExtBase
 {
     public function output(): string
     {
