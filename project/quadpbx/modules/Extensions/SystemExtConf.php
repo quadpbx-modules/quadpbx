@@ -2,10 +2,10 @@
 
 namespace QuadPBX\Modules\Extensions;
 
-use QuadPBX\Components\ExtensionsConf;
-use QuadPBX\Components\ExtensionsConf\Congestion;
-use QuadPBX\Components\ExtensionsConf\Hangup;
-use QuadPBX\Components\ExtensionsConf\Wait;
+use QuadPBX\Components\DialplanObjects\Congestion;
+use QuadPBX\Components\DialplanObjects\Hangup;
+use QuadPBX\Components\DialplanObjects\Wait;
+use QuadPBX\Components\ExtensionsConf\ExtensionsConf;
 use QuadPBX\Quad;
 
 class SystemExtConf

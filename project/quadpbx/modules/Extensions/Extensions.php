@@ -2,7 +2,7 @@
 
 namespace QuadPBX\Modules\Extensions;
 
-use QuadPBX\Components\Interfaces\BaseModuleDef;
+use QuadPBX\Interfaces\BaseModuleDef;
 
 class Extensions extends BaseModuleDef
 {

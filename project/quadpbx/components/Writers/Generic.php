@@ -2,8 +2,8 @@
 
 namespace QuadPBX\Components\Writers;
 
-use QuadPBX\Components\Interfaces\WriterInterface;
+use QuadPBX\Interfaces\AbstractWriterInterface;
 
-class Generic extends WriterInterface
+class Generic extends AbstractWriterInterface
 {
 }

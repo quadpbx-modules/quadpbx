@@ -4,7 +4,7 @@ namespace QuadPBX;
 
 use Exception;
 use QuadPBX\Core\Core;
-use QuadPBX\Components\Interfaces\BaseModuleDef;
+use QuadPBX\Interfaces\BaseModuleDef;
 
 class Quad
 {
