@@ -22,4 +22,16 @@ interface DialplanObject
      * @return void
      */
     public function setName(string $name): void;
+
+    public function getName(): string;
+
+    /**
+     * Set a comment for this line if wanted
+     *
+     * @param string $comment
+     * @return void
+     */
+    public function setComment(string $comment): void;
+
+    public function getComment(): string;
 }

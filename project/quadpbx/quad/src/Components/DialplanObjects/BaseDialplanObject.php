@@ -17,6 +17,7 @@ abstract class BaseDialplanObject implements DialplanObject
     protected $options;
 
     protected string $name = '';
+    protected string $comment = '';
 
     public function __construct($data = '', $options = '')
     {
@@ -40,6 +41,16 @@ abstract class BaseDialplanObject implements DialplanObject
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function setComment(string $comment): void
+    {
+        $this->comment = $comment;
+    }
+
+    public function getComment(): string
+    {
+        return $this->comment;
     }
 
     public function output(): string
