@@ -18,29 +18,32 @@ class Extensions extends BaseModuleDef
             'extensions-quadpbx.conf',
         ];
         foreach ($this->quad->getAllTenants() as $t) {
-            $ret[] = "tenant-$t.conf";
+            $ret[] = "tenants/ext-tenant-$t.conf";
         }
         return $ret;
     }
 
-    public function getProcessedFile(string $filename): string
-    {
+    public function getClassForFile(string $filename) {
         if ($filename === 'extensions.conf') {
             $c = new BaseExtConf($this->quad);
-            $c->load();
-            return $c->getOutput();
+            return $c;
         }
         if ($filename === 'extensions-quadpbx.conf') {
             $c = new SystemExtConf($this->quad);
-            $c->load();
-            return $c->getOutput();
+            return $c;
         }
-        if (preg_match("/tenant-(.+).conf/", $filename, $out)) {
+        if (preg_match("/ext-tenant-(.+).conf/", $filename, $out)) {
             $c = new TenantExtConf($this->quad, $out[1]);
-            $c->load();
-            return $c->getOutput();
+            return $c;
         }
         throw new \Exception("Unknown file requested: $filename");
+    }
+
+    public function getProcessedFile(string $filename): string
+    {
+        $c = $this->getClassForFile($filename);
+        $c->load();
+        return $c->getOutput();
     }
 
     public function getBackup(): array

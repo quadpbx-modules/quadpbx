@@ -6,17 +6,26 @@ use QuadPBX\Components\DialplanObjects\Hangup;
 
 abstract class DestinationInterface
 {
-    protected ?DialplanObject $d = null;
+    /** @var DialPlanObject[] */
+    protected array $dests = [];
 
-    public function setDest(DialplanObject $d) {
-        $this->d = $d;
+    /**
+     * Add a dest to be returned. Will append to the existing ones
+     *
+     * @param DialplanObject $d
+     *
+     * @return DialPlanObject
+     */
+    public function addDest(DialplanObject $d) {
+        $this->dests[] = $d;
+        return $d;
     }
 
-    public function getDestinationObj(): DialplanObject {
-        if ($this->d) {
-            return $this->d;
+    /** @return DialPlanObject[] */
+    public function getDestinationObjs(): array {
+        if (!$this->dests) {
+            $this->dests = [ new Hangup('NoDest') ];
         }
-        $o = new Hangup();
-        return $o;
+        return $this->dests;
     }
 }

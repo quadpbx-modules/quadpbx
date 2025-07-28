@@ -102,20 +102,29 @@ class Quad
 
     public function generateFiles()
     {
+        $filelist = [];
         foreach ($this->modules as $name => $mod) {
             /** @var BaseModuleDef $module */
             $module = $mod['class'];
             foreach ($module->filesManaged() as $file) {
                 try {
+                    if (strpos('/', $file) !== 0) {
+                        $destfile = "/etc/asterisk/$file";
+                    } else {
+                        $destfile = $file;
+                    }
+                    $dir = dirname($destfile);
+                    if (!is_dir($dir)) {
+                        mkdir($dir, 0777, true);
+                    }
                     $content = $module->getProcessedFile($file);
-                    print "File to generate: $file\n";
-                    // Here you would write the content to the file system.
-                    print "$content\n";
+                    $filelist[$destfile] = strlen($content);
+                    file_put_contents($destfile, $content);
                 } catch (\Exception $e) {
-                    // print "Error generating file $file: " . $e->getMessage() . "\n";
+                    print "Error generating file $file: " . $e->getMessage() . "\n";
                 }
             }
         }
-        return "GenerateFiles Generated";
+        return $filelist;
     }
 }

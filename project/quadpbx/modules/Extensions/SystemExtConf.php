@@ -35,7 +35,7 @@ class SystemExtConf
             // This is the entrypoint for the tenant
             $sname = "tenant-$tenant-incoming";
             $inc = $this->extc->getSection($sname);
-            $this->extc->addFileIncludeStart("tenant-$tenant.conf");
+            $this->extc->addFileIncludeStart("tenants/ext-tenant-$tenant.conf");
             $tset = new RawEntry("Set(TENANTNAME=$tenant)");
             $sysgoto = new ExtGoto($sname,'s',1);
             foreach ($didarr as $did) {

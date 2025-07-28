@@ -2,6 +2,7 @@
 
 namespace QuadPBX\Tenant;
 
+use QuadPBX\Components\DialplanObjects\Hangup;
 use QuadPBX\Components\DialplanObjects\RawEntry;
 use QuadPBX\Destination;
 use QuadPBX\Interfaces\DestinationInterface;
@@ -28,7 +29,8 @@ class IncomingDIDs {
 
         $d = new Destination();
         $o = new RawEntry($this->alldids[$did]['dest']);
-        $d->setDest($o);
+        $d->addDest($o);
+        $d->addDest(new Hangup())->setComment('Should never happen');
         return $d;
     }
 

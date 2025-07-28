@@ -34,9 +34,11 @@ class TenantExtConf
         $s = $this->extc->getSection($sname);
         foreach ($incoming->getDids($this->tenant) as $d) {
             $dest = $incoming->getDestinationForDid($d);
-            $o = $dest->getDestinationObj();
             $m = $s->getMatch($d);
-            $m->appendObject($o);
+            $o = $dest->getDestinationObjs();
+            foreach ($o as $dpo) {
+                $m->appendObject($dpo);
+            }
         }
     }
 

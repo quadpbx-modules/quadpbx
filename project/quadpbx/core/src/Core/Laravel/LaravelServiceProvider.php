@@ -2,12 +2,13 @@
 
 namespace QuadPBX\Core\Laravel;
 
+use QuadPBX\Core\Console\Qtest;
 use QuadPBX\Core\Console\ValidateInstall;
 
 class LaravelServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     /**
-     * @param \Illuminate\Routing\Router $router
+     * @param  \Illuminate\Routing\Router $router
      * @return void
      */
     public function boot(\Illuminate\Routing\Router $router)
@@ -17,7 +18,7 @@ class LaravelServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../../../routes/coreroutes.php');
         $this->loadViewsFrom(__DIR__ . '/../../../views', 'qcore');
         if ($this->app->runningInConsole()) {
-            $this->commands([ValidateInstall::class]);
+            $this->commands([ValidateInstall::class, Qtest::class]);
         }
     }
 
