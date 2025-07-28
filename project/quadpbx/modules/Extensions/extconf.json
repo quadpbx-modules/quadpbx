@@ -1,0 +1,10 @@
+{
+    "#fileincludes": {
+        "start": [ "extensions-quadpbx.conf" ]
+    },
+    "debug": {
+        "_.": [
+            [ "NoOp(debug)" ]
+        ]
+    }
+}

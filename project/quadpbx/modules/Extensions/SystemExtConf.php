@@ -2,59 +2,54 @@
 
 namespace QuadPBX\Modules\Extensions;
 
-use QuadPBX\Components\DialplanObjects\Congestion;
-use QuadPBX\Components\DialplanObjects\Hangup;
+use QuadPBX\Components\DialplanObjects\ExtGoto;
 use QuadPBX\Components\DialplanObjects\RawEntry;
-use QuadPBX\Components\DialplanObjects\Wait;
 use QuadPBX\Components\ExtensionsConf\ExtensionsConf;
 use QuadPBX\Components\ExtensionsConf\FromArray;
 use QuadPBX\Quad;
+use QuadPBX\Tenant\IncomingDIDs;
 
 class SystemExtConf
 {
-    private $destfile;
-
-    private $extensions;
-
     private ExtensionsConf $extc;
 
-    public function __construct(string $destfile, Quad $quad)
+    private Quad $q;
+
+    public function __construct(Quad $quad)
     {
-        $this->destfile = $destfile;
         $this->extc = new ExtensionsConf($quad);
+        $this->q = $quad;
     }
 
     public function load()
     {
-        $base = $this->extc->getSection('base');
-        $m = $base->getMatch('_[0-9]+');
-        $m->appendObject(new Hangup());
-        $m->appendObject(new Wait(10));
-        $other = $this->extc->getSection('internal');
-        $m = $other->getMatch('s');
-        $m->appendObject(new Wait(10));
-        $m->appendObject(new Congestion());
-        $first = $this->extc->getSection('first');
-        $first->changeOrder('sub', 1);
-        $r = new RawEntry('Raw(blah,entry)');
-        $r->setName('raw1');
-        $m = $first->getMatch('i');
-        $m->appendObject(new RawEntry('Raw(blah,entry)'))->setName('blah');
+        $j = json_decode(file_get_contents(__DIR__."/sysextconf.json"), true);
+        FromArray::loadJsonConf($this->extc, $j);
 
-        $arr = $this->extc->getSection('fromarr');
-        $a = [
-            "1234" => [
-                [ "Set(blah=foo)", 'This is a comment' ],
-                [ "Answer", '', 'namehere' ],
-                [ "DoSomething()" ]
-            ],
-            "9876" => [
-                [ "Set(foo=blah)" ],
-                [ "Abort" ],
-                [ "AllYourBase" ],
-            ],
-        ];
-        FromArray::loadSection($arr, $a);
+        $dids = new IncomingDIDs($this->q);
+
+        // This is in the core system context, before anything is included
+        $sysdids = $this->extc->getSection('sys-tenant-dids');
+
+        foreach ($dids->getAllSystemDids() as $tenant => $didarr) {
+            // This is the entrypoint for the tenant
+            $sname = "tenant-$tenant-incoming";
+            $inc = $this->extc->getSection($sname);
+            $this->extc->addFileIncludeStart("tenant-$tenant.conf");
+            $tset = new RawEntry("Set(TENANTNAME=$tenant)");
+            $sysgoto = new ExtGoto($sname,'s',1);
+            foreach ($didarr as $did) {
+                // Add the goto ,s,1 to sys-tenant-dids
+                $sm = $sysdids->getMatch($did);
+                $sm->appendObject($sysgoto);
+                // And now the moving bits for -incoming
+                $tm = $inc->getMatch($did);
+                $tm->appendObject($tset);
+                $g = new ExtGoto("tenant-$tenant-fromexternal",'${INCOMINGDID}',1);
+                $tm->appendObject($g);
+            }
+        }
+
     }
 
     public function getOutput(): string

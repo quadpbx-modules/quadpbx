@@ -1,0 +1,38 @@
+{
+    "common": {
+        "__includes": {
+            "early": [ "include-something-early" ],
+            "late": [ "include-something-late" ]
+        },
+        "_[0-9]+": [
+            [ "FirstEntry", "Comment" ],
+            [ "SecondThing" ]
+        ]
+    },
+    "from-external": {
+        "_.": [
+            [ "Set(INCOMINGDID=${EXTEN})" ],
+            [ "Goto(discover-tenant,s,1)" ]
+        ]
+    },
+    "discover-tenant": {
+        "s": [
+            [ "GotoIf($[${DIALPLAN_EXISTS(sys-tenant-did,${INCOMINGDID})}]?check-tenant-did,${INCOMINGDID})" ],
+            [ "ExecIf(wildcard-tenant-exists?Goto(wildcard-tenant,s,1)", "Fix this, obviously" ],
+            [ "Goto(reject-incoming,s,1)" ]
+        ]
+    },
+    "wildcard-tenant": {
+        "s": [
+            [ "Set(TENANTNAME=${WILDCARDTENANT})" ],
+            [ "Goto(tenant-${TENANTNAME}-incoming,${INCOMINGDID},1)" ]
+        ]
+    },
+    "reject-incoming": {
+        "s": [
+            [ "Playback(an-error-has-occured&vm-goodbye)" ],
+            [ "Congestion(5)" ],
+            [ "Hangup" ]
+        ]
+    }
+}

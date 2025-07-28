@@ -1,9 +1,11 @@
 {
+    "editor.autoClosingBrackets": "never",
     "[php]": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "obliviousharmony.vscode-php-codesniffer"
     },
-    "workbench.colorCustomizations": {},
+    "json.format.keepLines": true,
+    "workbench.colorCustomizations": { },
     "phpCodeSniffer.exec.linux": "/root/.config/composer/vendor/bin/phpcs",
     "phpCodeSniffer.standard": "Automatic"
 }
